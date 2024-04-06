@@ -28,7 +28,7 @@ tags:
 
 ## 无限递归
 
-一开始发现可以这样递归的找到指定的`parent`，提交后发现会超时。
+一开始发可以这样递归的找到指定的 `parent`，提交后发现会超时。
 
 ```c++
 class TreeAncestor {
@@ -39,7 +39,7 @@ public:
     TreeAncestor(int n, vector<int>& parent) {
         this->p = parent;
     }
-    
+  
     int getKthAncestor(int node, int k) {
         if (node<0) return -1;
         if (k==0) return node;
@@ -63,7 +63,7 @@ public:
     TreeAncestor(int n, vector<int>& parent) {
         this->p = parent;
     }
-    
+  
     int getKthAncestor(int node, int k) {
         auto it = record.find(node);
         if (it != record.end()){
@@ -98,12 +98,13 @@ public:
 ### 实现步骤
 
 1. **初始化**：
+
    - 创建一个数组 `ancestor[node][i]`，其中 `ancestor[node][i]` 表示节点 `node` 的第 \(2^i\) 个祖先是谁。对于初始化，`ancestor[node][0]` 是给定的 `parent[node]`。
-
 2. **预处理**：
-   - 使用动态规划填充 `ancestor` 数组。对于每个节点 `node` 和每个 \(i > 0\)，有 `ancestor[node][i] = ancestor[ancestor[node][i-1]][i-1]`。这里的意思是，节点 `node` 的第 \(2^i\) 个祖先是其第 \(2^{i-1}\) 个祖先的第 \(2^{i-1}\) 个祖先。
 
+   - 使用动态规划填充 `ancestor` 数组。对于每个节点 `node` 和每个 \(i > 0\)，有 `ancestor[node][i] = ancestor[ancestor[node][i-1]][i-1]`。这里的意思是，节点 `node` 的第 \(2^i\) 个祖先是其第 \(2^{i-1}\) 个祖先的第 \(2^{i-1}\) 个祖先。
 3. **查询**：
+
    - 对于查询 `getKthAncestor(node, k)`，将 \(k\) 转换为二进制表示。然后从高位开始，对于每个为 `1` 的位 `i`，更新 `node = ancestor[node][i]`。如果在某次更新中 `node` 变成了 `-1` 或在过程结束后 `node` 为 `-1`，则返回 `-1` 表示不存在第 \(k\) 个祖先。否则，返回最终的 `node`。
 
 ### 示例代码（C++）
