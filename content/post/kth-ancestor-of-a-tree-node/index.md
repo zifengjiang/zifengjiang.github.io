@@ -1,5 +1,5 @@
 ---
-title: "树节点的第 K 个祖先"
+title: 树节点的第K个祖先
 description: 
 date: 2024-04-06T16:33:45+08:00
 image: ../categories/leetcode/cover.png
