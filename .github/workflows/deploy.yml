@@ -54,8 +54,8 @@ jobs:
           single-commit: true
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./public
+
+
   deploy:
     needs: build
     permissions:
