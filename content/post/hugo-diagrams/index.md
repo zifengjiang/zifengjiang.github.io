@@ -14,7 +14,7 @@ tags:
 
 ---
 
-集成参考了 Google 的 [docsy](https://github.com/google/docsy) 中的集成方式。
+集成参考了 Google 的 [docsy](https://github.com/google/docsy) 中的集成、  方式。
 
 主题 [hugo-theme-stack](https://stack.jimmycai.com/) 中没有集成 Mermaid，仅集成了 Katex，需要画图的时候就要自己引入 Mermaid 。
 
