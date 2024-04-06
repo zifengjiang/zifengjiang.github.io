@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pages on ziFeng&#39;s Blog</title>
-        <link>http://localhost:1313/page/</link>
+        <link>https://jf666666.github.io/page/</link>
         <description>Recent content in Pages on ziFeng&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language><atom:link href="http://localhost:1313/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <language>zh-cn</language><atom:link href="https://jf666666.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>归档</title>
-        <link>http://localhost:1313/archives/</link>
+        <link>https://jf666666.github.io/archives/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/archives/</guid>
+        <guid>https://jf666666.github.io/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>链接</title>
-        <link>http://localhost:1313/links/</link>
+        <link>https://jf666666.github.io/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/links/</guid>
+        <guid>https://jf666666.github.io/links/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -50,10 +50,10 @@
         </item>
         <item>
         <title>书籍</title>
-        <link>http://localhost:1313/book/</link>
+        <link>https://jf666666.github.io/book/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/book/</guid>
+        <guid>https://jf666666.github.io/book/</guid>
         <description>&lt;h2 id=&#34;说明&#34;&gt;
     &lt;a href=&#34;#%e8%af%b4%e6%98%8e&#34;&gt;#&lt;/a&gt;
     说明
@@ -62,7 +62,7 @@
     &lt;a href=&#34;#%e6%94%b6%e9%9b%86%e6%9d%a5%e7%9a%84&#34;&gt;#&lt;/a&gt;
     收集来的
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://localhost:1313/books/markdown-simple-world/index.html&#34; &gt;Markdown·简单的世界&lt;/a&gt; (&lt;a class=&#34;link&#34; href=&#34;https://wizardforcel.gitbooks.io/markdown-simple-world/content/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://jf666666.github.io/books/markdown-simple-world/index.html&#34; &gt;Markdown·简单的世界&lt;/a&gt; (&lt;a class=&#34;link&#34; href=&#34;https://wizardforcel.gitbooks.io/markdown-simple-world/content/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;原文地址&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;个人原创&#34;&gt;
@@ -72,10 +72,10 @@
         </item>
         <item>
         <title>搜索</title>
-        <link>http://localhost:1313/search/</link>
+        <link>https://jf666666.github.io/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/search/</guid>
+        <guid>https://jf666666.github.io/search/</guid>
         <description></description>
         </item>
         
