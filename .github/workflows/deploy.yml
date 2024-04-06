@@ -52,6 +52,3 @@ jobs:
           folder: public
           clean: true
           single-commit: true
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
