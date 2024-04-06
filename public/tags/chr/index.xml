@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Chr on ziFeng&#39;s Blog</title>
+        <link>http://localhost:1313/tags/chr/</link>
+        <description>Recent content in Chr on ziFeng&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Thu, 07 Dec 2023 17:11:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/chr/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RouterOS CHR v7 UEFI 镜像，使用 Github Actions 构建</title>
+        <link>http://localhost:1313/p/2023/12/routeros-uefi/</link>
+        <pubDate>Thu, 07 Dec 2023 17:11:11 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/2023/12/routeros-uefi/</guid>
+        <description>&lt;img src="http://localhost:1313/p/2023/12/routeros-uefi/cover.png" alt="Featured image of post RouterOS CHR v7 UEFI 镜像，使用 Github Actions 构建" /&gt;&lt;p&gt;🔥🔥🔥：稳定好用的机场/梯子 &lt;a class=&#34;link&#34; href=&#34;https://tagss04.pro/#/auth/2neqgxFl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TAG 全球250+节点、99+流媒体解锁&lt;/a&gt;，更多参考&lt;a class=&#34;link&#34; href=&#34;https://alecthw.github.io/p/2023/11/airport-recommend/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;机场推荐&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;👉 需要的朋友自取。&lt;/p&gt;
+&lt;p&gt;使用 Github Actions 构建，过程全透明，不存在后门的可能。官方镜像，&lt;code&gt;非破解&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;RouterOS chr-7.x 已经包含了 efi 启动文件，但是分区类型是 ext2。&lt;/p&gt;
+&lt;p&gt;所以，只要把分区类型从 ext2 转成 fat 就可以从 uefi 引导启动了。&lt;/p&gt;
+&lt;p&gt;当然，喜欢 GPT 的话，也可以制作 Hybrid MBR。&lt;/p&gt;
+&lt;h2 id=&#34;镜像下载httpsgithubcomalecthwmikrotik-routeros-chr-efireleases&#34;&gt;
+    &lt;a href=&#34;#%e9%95%9c%e5%83%8f%e4%b8%8b%e8%bd%bdhttpsgithubcomalecthwmikrotik-routeros-chr-efireleases&#34;&gt;#&lt;/a&gt;
+    &lt;a class=&#34;link&#34; href=&#34;https://github.com/alecthw/mikrotik-routeros-chr-efi/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;镜像下载&lt;/a&gt;
+&lt;/h2&gt;&lt;p&gt;👉 &lt;a class=&#34;link&#34; href=&#34;https://github.com/alecthw/mikrotik-routeros-chr-efi/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Release&lt;/a&gt; 👈&lt;/p&gt;
+&lt;p&gt;👉 &lt;a class=&#34;link&#34; href=&#34;https://www.right.com.cn/forum/thread-8271574-1-1.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;破解版传送门&lt;/a&gt; 👈&lt;/p&gt;
+&lt;p&gt;包含的镜像类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;img&lt;/li&gt;
+&lt;li&gt;qcow2&lt;/li&gt;
+&lt;li&gt;vdi&lt;/li&gt;
+&lt;li&gt;vhd&lt;/li&gt;
+&lt;li&gt;vhdx&lt;/li&gt;
+&lt;li&gt;vmdk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;hybrid-mbr-记录&#34;&gt;
+    &lt;a href=&#34;#hybrid-mbr-%e8%ae%b0%e5%bd%95&#34;&gt;#&lt;/a&gt;
+    Hybrid MBR 记录
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# use GPT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; t &lt;span class=&#34;c1&#34;&gt;# change partition code&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# select first partition&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8300&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# change code to Linux filesystem 8300&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; r &lt;span class=&#34;c1&#34;&gt;# Recovery/transformation&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; h &lt;span class=&#34;c1&#34;&gt;# Hybrid MBR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# partitions added to the hybrid MBR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; n &lt;span class=&#34;c1&#34;&gt;# Place EFI GPT (0xEE) partition first in MBR (good for GRUB)? (Y/N)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;# Enter an MBR hex code (default 83)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; y &lt;span class=&#34;c1&#34;&gt;# Set the bootable flag? (Y/N)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;# Enter an MBR hex code (default 83)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; n &lt;span class=&#34;c1&#34;&gt;# Set the bootable flag? (Y/N)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; n &lt;span class=&#34;c1&#34;&gt;# Unused partition space(s) found. Use one to protect more partitions? (Y/N)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; w &lt;span class=&#34;c1&#34;&gt;# write changes to disk&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; y &lt;span class=&#34;c1&#34;&gt;# confirm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; sudo -E gdisk /dev/nbd1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
