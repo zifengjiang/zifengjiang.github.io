@@ -1,13 +1,9 @@
 ---
 title: 树节点的第K个祖先
-description: 
+description: 力扣1483题
 date: 2024-04-06T16:33:45+08:00
+slug: kth-ancestor-of-a-tree-node
 image: ../categories/leetcode/cover.png
-math: 
-license: 
-hidden: false
-comments: true
-draft: true
 categories:
   - leetcode
 tags:
