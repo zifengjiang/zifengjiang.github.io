@@ -63,7 +63,7 @@ tags:
 
 ## cuDNN
 ### 压缩包下载
-1. **cuDNN**和**CUDA**是配套的，需要下载相对应的版本，进入[cuDNN官网](https://developer.nvidia.com/cudnn)
+1. **cuDNN**和**CUDA**是配套的，需下载相对应的版本，进入[cuDNN官网](https://developer.nvidia.com/cudnn)
 ![](17033345954133.jpg)
 2. 需要**注册账号**后才能进行下载
 ![](17033345954233.jpg)
