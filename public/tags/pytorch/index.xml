@@ -2,59 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Pytorch on ziFeng&#39;s Blog</title>
-        <link>https://jf666666.github.io/tags/pytorch/</link>
+        <link>http://localhost:1313/tags/pytorch/</link>
         <description>Recent content in Pytorch on ziFeng&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Wed, 03 Apr 2024 22:34:22 +0800</lastBuildDate><atom:link href="https://jf666666.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 03 Apr 2024 22:34:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/pytorch/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>在Windows配置PyTroch，含conda、cuda等</title>
-        <link>https://jf666666.github.io/p/2024/04/pytorch-setup/</link>
+        <link>http://localhost:1313/p/2024/04/pytorch-setup/</link>
         <pubDate>Wed, 03 Apr 2024 22:34:22 +0800</pubDate>
         
-        <guid>https://jf666666.github.io/p/2024/04/pytorch-setup/</guid>
-        <description>&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/cover.png" alt="Featured image of post 在Windows配置PyTroch，含conda、cuda等" /&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%96%87%e6%a1%a3&#34; &gt;环境配置文档&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#cuda&#34; &gt;CUDA&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85%e5%8c%85%e4%b8%8b%e8%bd%bd&#34; &gt;安装包下载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#cuda%e5%ae%89%e8%a3%85&#34; &gt;CUDA安装&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#cudnn&#34; &gt;cuDNN&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8e%8b%e7%bc%a9%e5%8c%85%e4%b8%8b%e8%bd%bd&#34; &gt;压缩包下载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#cudnn%e5%ae%89%e8%a3%85&#34; &gt;cuDNN安装&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#conda&#34; &gt;Conda&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85%e5%8c%85%e4%b8%8b%e8%bd%bd-1&#34; &gt;安装包下载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85%e4%b8%8e%e9%85%8d%e7%bd%ae&#34; &gt;安装与配置&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%ae%89%e8%a3%85&#34; &gt;安装&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%85%8d%e7%bd%ae&#34; &gt;配置&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#visual-studio-code&#34; &gt;Visual Studio Code&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85%e5%8c%85&#34; &gt;下载安装包&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e9%85%8d%e7%bd%ae%e7%8e%af%e5%a2%83&#34; &gt;配置环境&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#pytorch&#34; &gt;PyTorch&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#powershell%e9%85%8d%e7%bd%ae&#34; &gt;PowerShell配置&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#python&#34; &gt;Python&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%bd%bf%e7%94%a8conda%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83&#34; &gt;使用conda创建一个虚拟环境&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;环境配置文档&#34;&gt;
+        <guid>http://localhost:1313/p/2024/04/pytorch-setup/</guid>
+        <description>&lt;img src="http://localhost:1313/p/2024/04/pytorch-setup/cover.png" alt="Featured image of post 在Windows配置PyTroch，含conda、cuda等" /&gt;&lt;h1 id=&#34;环境配置文档&#34;&gt;
     &lt;a href=&#34;#%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%96%87%e6%a1%a3&#34;&gt;#&lt;/a&gt;
     环境配置文档
 &lt;/h1&gt;&lt;h2 id=&#34;cuda&#34;&gt;
@@ -66,10 +24,10 @@
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;前往&lt;a class=&#34;link&#34; href=&#34;https://developer.nvidia.com/cuda-toolkit-archive&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CUDA Toolkit Archive&lt;/a&gt;
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345952833.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345952833.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345952833_hu7c2d80bad186d012b26df9b8500101f5_325068_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345952833_hu7c2d80bad186d012b26df9b8500101f5_325068_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345952833_hu7c2d80bad186d012b26df9b8500101f5_325068_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345952833_hu7c2d80bad186d012b26df9b8500101f5_325068_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -80,10 +38,10 @@
 &gt;&lt;/li&gt;
 &lt;li&gt;下载在之前提到的Cuda 12.1版本，这里选择&lt;a class=&#34;link&#34; href=&#34;https://developer.nvidia.com/cuda-12-1-1-download-archive&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CUDA Toolkit 12.1.1&lt;/a&gt;进行下载，点击链接进入，选择&lt;code&gt;Windows&lt;/code&gt;、&lt;code&gt;x86_64&lt;/code&gt;、&lt;code&gt;10&lt;/code&gt;、&lt;code&gt;exe(local)&lt;/code&gt;，点击网页中的&lt;code&gt;exe(local)&lt;/code&gt;开始下载。
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953309.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953309.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953309_hu7c2d80bad186d012b26df9b8500101f5_193849_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953309_hu7c2d80bad186d012b26df9b8500101f5_193849_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953309_hu7c2d80bad186d012b26df9b8500101f5_193849_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345953309_hu7c2d80bad186d012b26df9b8500101f5_193849_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -99,10 +57,10 @@
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;下载完成后得到一个大概3g的安装包，打开进行安装，选择一个临时目录进行解压，点击ok
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953432.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953432.jpg&#34;
 	width=&#34;617&#34;
 	height=&#34;233&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953432_hu7c2d80bad186d012b26df9b8500101f5_63721_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953432_hu7c2d80bad186d012b26df9b8500101f5_63721_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953432_hu7c2d80bad186d012b26df9b8500101f5_63721_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345953432_hu7c2d80bad186d012b26df9b8500101f5_63721_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -114,10 +72,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;等待解压完成
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87.png&#34;
 	width=&#34;425&#34;
 	height=&#34;171&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87_hu0976bf856bb0f5a5cdbe84d8f9248ecb_17680_480x0_resize_box_3.png 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87_hu0976bf856bb0f5a5cdbe84d8f9248ecb_17680_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87_hu0976bf856bb0f5a5cdbe84d8f9248ecb_17680_480x0_resize_box_3.png 480w, http://localhost:1313/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87_hu0976bf856bb0f5a5cdbe84d8f9248ecb_17680_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;e739ad870e39186a7670abc870efea87&#34;
@@ -131,10 +89,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;解压完成后进入安装界面，这里也需要等待
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af.png&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af.png&#34;
 	width=&#34;607&#34;
 	height=&#34;456&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af_hu93555564adeb0e3a58857dcce15f172e_168251_480x0_resize_box_3.png 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af_hu93555564adeb0e3a58857dcce15f172e_168251_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af_hu93555564adeb0e3a58857dcce15f172e_168251_480x0_resize_box_3.png 480w, http://localhost:1313/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af_hu93555564adeb0e3a58857dcce15f172e_168251_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;1eae4dbb378116c4c1b66fa3737e05af&#34;
@@ -148,10 +106,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;点击同意并继续
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953616.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953616.jpg&#34;
 	width=&#34;609&#34;
 	height=&#34;455&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953616_hu7c2d80bad186d012b26df9b8500101f5_80915_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953616_hu7c2d80bad186d012b26df9b8500101f5_80915_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953616_hu7c2d80bad186d012b26df9b8500101f5_80915_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345953616_hu7c2d80bad186d012b26df9b8500101f5_80915_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -163,10 +121,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;点击自定义后点击下一步
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953751.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953751.jpg&#34;
 	width=&#34;604&#34;
 	height=&#34;450&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953751_hu7c2d80bad186d012b26df9b8500101f5_72121_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953751_hu7c2d80bad186d012b26df9b8500101f5_72121_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953751_hu7c2d80bad186d012b26df9b8500101f5_72121_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345953751_hu7c2d80bad186d012b26df9b8500101f5_72121_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -178,10 +136,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;展开CUDA选项取消勾选&lt;code&gt;Visual Studio Integration&lt;/code&gt;，如图所示，其余不动，点击下一步
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953843.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953843.jpg&#34;
 	width=&#34;596&#34;
 	height=&#34;444&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953843_hu7c2d80bad186d012b26df9b8500101f5_71058_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953843_hu7c2d80bad186d012b26df9b8500101f5_71058_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953843_hu7c2d80bad186d012b26df9b8500101f5_71058_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345953843_hu7c2d80bad186d012b26df9b8500101f5_71058_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -193,10 +151,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;安装位置不需要修改，直接点击下一步
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953942.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953942.jpg&#34;
 	width=&#34;604&#34;
 	height=&#34;449&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953942_hu7c2d80bad186d012b26df9b8500101f5_71406_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953942_hu7c2d80bad186d012b26df9b8500101f5_71406_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345953942_hu7c2d80bad186d012b26df9b8500101f5_71406_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345953942_hu7c2d80bad186d012b26df9b8500101f5_71406_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -208,10 +166,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;等待安装结束即可
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954036.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954036.jpg&#34;
 	width=&#34;603&#34;
 	height=&#34;448&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954036_hu7c2d80bad186d012b26df9b8500101f5_56831_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954036_hu7c2d80bad186d012b26df9b8500101f5_56831_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954036_hu7c2d80bad186d012b26df9b8500101f5_56831_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954036_hu7c2d80bad186d012b26df9b8500101f5_56831_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -229,12 +187,12 @@
     &lt;a href=&#34;#%e5%8e%8b%e7%bc%a9%e5%8c%85%e4%b8%8b%e8%bd%bd&#34;&gt;#&lt;/a&gt;
     压缩包下载
 &lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;cuDNN&lt;/strong&gt;和&lt;strong&gt;CUDA&lt;/strong&gt;是配套的，需要下载相对应的版本，进入&lt;a class=&#34;link&#34; href=&#34;https://developer.nvidia.com/cudnn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;li&gt;&lt;strong&gt;cuDNN&lt;/strong&gt;和&lt;strong&gt;CUDA&lt;/strong&gt;是配套的，需下载相对应的版本，进入&lt;a class=&#34;link&#34; href=&#34;https://developer.nvidia.com/cudnn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;cuDNN官网&lt;/a&gt;
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954133.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954133.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954133_hu7c2d80bad186d012b26df9b8500101f5_204315_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954133_hu7c2d80bad186d012b26df9b8500101f5_204315_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954133_hu7c2d80bad186d012b26df9b8500101f5_204315_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954133_hu7c2d80bad186d012b26df9b8500101f5_204315_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -244,10 +202,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;需要&lt;strong&gt;注册账号&lt;/strong&gt;后才能进行下载
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954233.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954233.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954233_hu7c2d80bad186d012b26df9b8500101f5_137914_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954233_hu7c2d80bad186d012b26df9b8500101f5_137914_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954233_hu7c2d80bad186d012b26df9b8500101f5_137914_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954233_hu7c2d80bad186d012b26df9b8500101f5_137914_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -257,10 +215,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;注册好账号之后点击&lt;code&gt;Download cuDNN Library&lt;/code&gt;按钮进入下图的下载界面
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954334.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954334.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954334_hu7c2d80bad186d012b26df9b8500101f5_228198_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954334_hu7c2d80bad186d012b26df9b8500101f5_228198_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954334_hu7c2d80bad186d012b26df9b8500101f5_228198_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954334_hu7c2d80bad186d012b26df9b8500101f5_228198_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -270,10 +228,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;同意协议&lt;/strong&gt;后，选择&lt;code&gt;for CUDA 12.x&lt;/code&gt;进行下一个界面
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954434.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954434.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954434_hu7c2d80bad186d012b26df9b8500101f5_253197_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954434_hu7c2d80bad186d012b26df9b8500101f5_253197_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954434_hu7c2d80bad186d012b26df9b8500101f5_253197_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954434_hu7c2d80bad186d012b26df9b8500101f5_253197_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -283,10 +241,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;这里选择第一个&lt;code&gt;Local install for Windows(Zip)&lt;/code&gt;进行下载
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954537.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954537.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954537_hu7c2d80bad186d012b26df9b8500101f5_247125_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954537_hu7c2d80bad186d012b26df9b8500101f5_247125_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954537_hu7c2d80bad186d012b26df9b8500101f5_247125_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954537_hu7c2d80bad186d012b26df9b8500101f5_247125_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -301,10 +259,10 @@
     cuDNN安装
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;下载完成后得到一个压缩包
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954639.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954639.jpg&#34;
 	width=&#34;770&#34;
 	height=&#34;96&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954639_hu7c2d80bad186d012b26df9b8500101f5_43040_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954639_hu7c2d80bad186d012b26df9b8500101f5_43040_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954639_hu7c2d80bad186d012b26df9b8500101f5_43040_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954639_hu7c2d80bad186d012b26df9b8500101f5_43040_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -314,10 +272,10 @@
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;解压该压缩包可以看到其中有三个文件夹
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954741.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954741.jpg&#34;
 	width=&#34;778&#34;
 	height=&#34;186&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954741_hu7c2d80bad186d012b26df9b8500101f5_34022_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954741_hu7c2d80bad186d012b26df9b8500101f5_34022_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954741_hu7c2d80bad186d012b26df9b8500101f5_34022_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954741_hu7c2d80bad186d012b26df9b8500101f5_34022_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -336,10 +294,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954846.jpg&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954846.jpg&#34;
 	width=&#34;817&#34;
 	height=&#34;581&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954846_hu7c2d80bad186d012b26df9b8500101f5_91152_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954846_hu7c2d80bad186d012b26df9b8500101f5_91152_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954846_hu7c2d80bad186d012b26df9b8500101f5_91152_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954846_hu7c2d80bad186d012b26df9b8500101f5_91152_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -352,10 +310,10 @@
 4. 将CUDA添加到&lt;strong&gt;环境变量&lt;/strong&gt;中&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;按WIN+R，打开【运行】对话框。 输入sysdm.cpl，点【确定】按钮，点开高级选项卡，点开环境变量
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954950.jpg&#34;
 	width=&#34;2000&#34;
 	height=&#34;784&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -398,10 +356,10 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\libnvvp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955055.jpg&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955055.jpg&#34;
 	width=&#34;1068&#34;
 	height=&#34;1138&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955055_hu783122627ef1a33c8941efdd9234242b_337282_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955055_hu783122627ef1a33c8941efdd9234242b_337282_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955055_hu783122627ef1a33c8941efdd9234242b_337282_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955055_hu783122627ef1a33c8941efdd9234242b_337282_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -427,10 +385,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
     安装包下载
 &lt;/h3&gt;&lt;p&gt;本文档选择&lt;strong&gt;Anaconda&lt;/strong&gt;进行安装，进入&lt;a class=&#34;link&#34; href=&#34;https://www.anaconda.com/download#downloads&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Anaconda下载&lt;/a&gt;，下载Windows版本的安装包即可
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955251.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955251.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955251_hu7c2d80bad186d012b26df9b8500101f5_200994_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955251_hu7c2d80bad186d012b26df9b8500101f5_200994_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955251_hu7c2d80bad186d012b26df9b8500101f5_200994_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955251_hu7c2d80bad186d012b26df9b8500101f5_200994_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -447,10 +405,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
     安装
 &lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;打开下载好的安装包进行安装步骤
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955377.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955377.jpg&#34;
 	width=&#34;1030&#34;
 	height=&#34;856&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955377_hu783122627ef1a33c8941efdd9234242b_162292_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955377_hu783122627ef1a33c8941efdd9234242b_162292_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955377_hu783122627ef1a33c8941efdd9234242b_162292_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955377_hu783122627ef1a33c8941efdd9234242b_162292_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -460,10 +418,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;点击&lt;code&gt;Next&lt;/code&gt;进入下一步
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955499.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955499.jpg&#34;
 	width=&#34;1006&#34;
 	height=&#34;776&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955499_hu783122627ef1a33c8941efdd9234242b_216327_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955499_hu783122627ef1a33c8941efdd9234242b_216327_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955499_hu783122627ef1a33c8941efdd9234242b_216327_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955499_hu783122627ef1a33c8941efdd9234242b_216327_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -473,10 +431,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;点击&lt;code&gt;I Agree&lt;/code&gt;同意协议
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955616.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955616.jpg&#34;
 	width=&#34;990&#34;
 	height=&#34;766&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955616_hu783122627ef1a33c8941efdd9234242b_90150_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955616_hu783122627ef1a33c8941efdd9234242b_90150_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955616_hu783122627ef1a33c8941efdd9234242b_90150_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955616_hu783122627ef1a33c8941efdd9234242b_90150_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -486,10 +444,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;保持默认选择&lt;code&gt;Just Me&lt;/code&gt;，点击下一步
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955769.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955769.jpg&#34;
 	width=&#34;992&#34;
 	height=&#34;770&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955769_hu783122627ef1a33c8941efdd9234242b_133151_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955769_hu783122627ef1a33c8941efdd9234242b_133151_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955769_hu783122627ef1a33c8941efdd9234242b_133151_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955769_hu783122627ef1a33c8941efdd9234242b_133151_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -499,10 +457,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;这里可以选择其他安装位置，最好是默认的
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955885.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955885.jpg&#34;
 	width=&#34;994&#34;
 	height=&#34;774&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955885_hu783122627ef1a33c8941efdd9234242b_185993_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955885_hu783122627ef1a33c8941efdd9234242b_185993_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345955885_hu783122627ef1a33c8941efdd9234242b_185993_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345955885_hu783122627ef1a33c8941efdd9234242b_185993_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -521,10 +479,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;按WIN+R，打开【运行】对话框。 输入sysdm.cpl，点【确定】按钮，点开高级选项卡，点开环境变量
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954950.jpg&#34;
 	width=&#34;2000&#34;
 	height=&#34;784&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -568,10 +526,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
     下载安装包
 &lt;/h3&gt;&lt;p&gt;进入&lt;a class=&#34;link&#34; href=&#34;https://code.visualstudio.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;vscode官网&lt;/a&gt;，下载&lt;strong&gt;Windows&lt;/strong&gt;的&lt;strong&gt;Stable&lt;/strong&gt;安装包
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956001.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956001.jpg&#34;
 	width=&#34;2804&#34;
 	height=&#34;1934&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956001_hud270275eb86d5223d279751e979ec3c4_761655_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956001_hud270275eb86d5223d279751e979ec3c4_761655_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956001_hud270275eb86d5223d279751e979ec3c4_761655_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956001_hud270275eb86d5223d279751e979ec3c4_761655_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -591,10 +549,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;点击左侧的扩展按钮，搜索&lt;code&gt;Chinese&lt;/code&gt;插件并安装
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956128.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956128.jpg&#34;
 	width=&#34;3840&#34;
 	height=&#34;2160&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956128_hu783122627ef1a33c8941efdd9234242b_826493_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956128_hu783122627ef1a33c8941efdd9234242b_826493_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956128_hu783122627ef1a33c8941efdd9234242b_826493_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956128_hu783122627ef1a33c8941efdd9234242b_826493_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -604,10 +562,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;按下快捷键&lt;code&gt;Ctrl+Shift+P&lt;/code&gt;，输入&lt;code&gt;config display language&lt;/code&gt;，选择中文即可
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956262.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956262.jpg&#34;
 	width=&#34;3840&#34;
 	height=&#34;2160&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956262_hu783122627ef1a33c8941efdd9234242b_818061_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956262_hu783122627ef1a33c8941efdd9234242b_818061_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956262_hu783122627ef1a33c8941efdd9234242b_818061_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956262_hu783122627ef1a33c8941efdd9234242b_818061_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -619,10 +577,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &lt;/ul&gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;安装Python扩展，在左侧扩展栏搜索&lt;code&gt;Python&lt;/code&gt;、&lt;code&gt;Python Environment Manager&lt;/code&gt;进行安装
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956394.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956394.jpg&#34;
 	width=&#34;3840&#34;
 	height=&#34;2160&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956394_hu783122627ef1a33c8941efdd9234242b_646262_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956394_hu783122627ef1a33c8941efdd9234242b_646262_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956394_hu783122627ef1a33c8941efdd9234242b_646262_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956394_hu783122627ef1a33c8941efdd9234242b_646262_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -633,10 +591,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &gt;&lt;/li&gt;
 &lt;li&gt;Conda设置
 打开vscode设置，搜索conda，在下图中填入conda路径即可
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956535.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956535.jpg&#34;
 	width=&#34;3840&#34;
 	height=&#34;2160&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956535_hu783122627ef1a33c8941efdd9234242b_595032_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956535_hu783122627ef1a33c8941efdd9234242b_595032_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956535_hu783122627ef1a33c8941efdd9234242b_595032_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956535_hu783122627ef1a33c8941efdd9234242b_595032_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -651,10 +609,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
     PyTorch
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pytorch.org&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Pytorch&lt;/a&gt;是yolo进行检测与训练需要的最基本的库，也需要根据当前最新的pytorch支持的cuda版本，选择对应版本的CUDA安装，
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956687.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956687.jpg&#34;
 	width=&#34;1402&#34;
 	height=&#34;967&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956687_hu7c2d80bad186d012b26df9b8500101f5_240511_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956687_hu7c2d80bad186d012b26df9b8500101f5_240511_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956687_hu7c2d80bad186d012b26df9b8500101f5_240511_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956687_hu7c2d80bad186d012b26df9b8500101f5_240511_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -680,10 +638,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;在菜单栏中找到&lt;code&gt;PowerShell&lt;/code&gt;，点击&lt;code&gt;以管理员身份运行&lt;/code&gt;。
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956835.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956835.jpg&#34;
 	width=&#34;3840&#34;
 	height=&#34;2160&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956835_hu783122627ef1a33c8941efdd9234242b_664095_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956835_hu783122627ef1a33c8941efdd9234242b_664095_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345956835_hu783122627ef1a33c8941efdd9234242b_664095_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345956835_hu783122627ef1a33c8941efdd9234242b_664095_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -702,10 +660,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;conda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;init&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345957003.jpg&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345957003.jpg&#34;
 	width=&#34;1724&#34;
 	height=&#34;1464&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033345957003_hu783122627ef1a33c8941efdd9234242b_529051_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345957003_hu783122627ef1a33c8941efdd9234242b_529051_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033345957003_hu783122627ef1a33c8941efdd9234242b_529051_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033345957003_hu783122627ef1a33c8941efdd9234242b_529051_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -737,10 +695,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
     使用conda创建一个虚拟环境
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;打开vscode，新建一个终端
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033316544757.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033316544757.jpg&#34;
 	width=&#34;3840&#34;
 	height=&#34;2160&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033316544757_hufcf2301eede78afda1d33c6ccae7086f_808746_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033316544757_hufcf2301eede78afda1d33c6ccae7086f_808746_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033316544757_hufcf2301eede78afda1d33c6ccae7086f_808746_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033316544757_hufcf2301eede78afda1d33c6ccae7086f_808746_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -783,10 +741,10 @@ Conda是一个强大的工具，主要用于科学计算领域，它的作用可
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;运行后查看输出是否为&lt;code&gt;True&lt;/code&gt;，为&lt;code&gt;True&lt;/code&gt;则代表安装一切顺利
-&lt;img src=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033319295868.jpg&#34;
+&lt;img src=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033319295868.jpg&#34;
 	width=&#34;840&#34;
 	height=&#34;390&#34;
-	srcset=&#34;https://jf666666.github.io/p/2024/04/pytorch-setup/17033319295868_hufcf2301eede78afda1d33c6ccae7086f_74876_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033319295868_hufcf2301eede78afda1d33c6ccae7086f_74876_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/p/2024/04/pytorch-setup/17033319295868_hufcf2301eede78afda1d33c6ccae7086f_74876_480x0_resize_q75_box.jpg 480w, http://localhost:1313/p/2024/04/pytorch-setup/17033319295868_hufcf2301eede78afda1d33c6ccae7086f_74876_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	

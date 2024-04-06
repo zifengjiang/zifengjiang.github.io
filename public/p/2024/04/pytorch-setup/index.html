@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="完整的配置流程">
 <title>在Windows配置PyTroch，含conda、cuda等</title>
 
-<link rel='canonical' href='https://jf666666.github.io/p/2024/04/pytorch-setup/'>
+<link rel='canonical' href='http://localhost:1313/p/2024/04/pytorch-setup/'>
 
 <link rel="stylesheet" href="/scss/style.min.8e60baf4cd3fc55968717a6e39762f4d28ed7ef6007566b6c7970ad0fe907198.css"><meta property='og:title' content="在Windows配置PyTroch，含conda、cuda等">
 <meta property='og:description' content="完整的配置流程">
-<meta property='og:url' content='https://jf666666.github.io/p/2024/04/pytorch-setup/'>
+<meta property='og:url' content='http://localhost:1313/p/2024/04/pytorch-setup/'>
 <meta property='og:site_name' content='ziFeng&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='pytorch' /><meta property='article:tag' content='cuda' /><meta property='article:tag' content='conda' /><meta property='article:published_time' content='2024-04-03T22:34:22&#43;08:00'/><meta property='article:modified_time' content='2024-04-03T22:34:22&#43;08:00'/><meta property='og:image' content='https://jf666666.github.io/p/2024/04/pytorch-setup/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='pytorch' /><meta property='article:tag' content='cuda' /><meta property='article:tag' content='conda' /><meta property='article:published_time' content='2024-04-03T22:34:22&#43;08:00'/><meta property='article:modified_time' content='2024-04-03T22:34:22&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/2024/04/pytorch-setup/cover.png' />
 <meta name="twitter:title" content="在Windows配置PyTroch，含conda、cuda等">
 <meta name="twitter:description" content="完整的配置流程"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://jf666666.github.io/p/2024/04/pytorch-setup/cover.png' />
+    <meta name="twitter:image" content='http://localhost:1313/p/2024/04/pytorch-setup/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 <script
   src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -414,49 +414,7 @@
     <section class="article-content">
     
     
-    <ul>
-<li><a class="link" href="#%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%96%87%e6%a1%a3" >环境配置文档</a>
-<ul>
-<li><a class="link" href="#cuda" >CUDA</a>
-<ul>
-<li><a class="link" href="#%e5%ae%89%e8%a3%85%e5%8c%85%e4%b8%8b%e8%bd%bd" >安装包下载</a></li>
-<li><a class="link" href="#cuda%e5%ae%89%e8%a3%85" >CUDA安装</a></li>
-</ul>
-</li>
-<li><a class="link" href="#cudnn" >cuDNN</a>
-<ul>
-<li><a class="link" href="#%e5%8e%8b%e7%bc%a9%e5%8c%85%e4%b8%8b%e8%bd%bd" >压缩包下载</a></li>
-<li><a class="link" href="#cudnn%e5%ae%89%e8%a3%85" >cuDNN安装</a></li>
-</ul>
-</li>
-<li><a class="link" href="#conda" >Conda</a>
-<ul>
-<li><a class="link" href="#%e5%ae%89%e8%a3%85%e5%8c%85%e4%b8%8b%e8%bd%bd-1" >安装包下载</a></li>
-<li><a class="link" href="#%e5%ae%89%e8%a3%85%e4%b8%8e%e9%85%8d%e7%bd%ae" >安装与配置</a>
-<ul>
-<li><a class="link" href="#%e5%ae%89%e8%a3%85" >安装</a></li>
-<li><a class="link" href="#%e9%85%8d%e7%bd%ae" >配置</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="link" href="#visual-studio-code" >Visual Studio Code</a>
-<ul>
-<li><a class="link" href="#%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85%e5%8c%85" >下载安装包</a></li>
-<li><a class="link" href="#%e9%85%8d%e7%bd%ae%e7%8e%af%e5%a2%83" >配置环境</a></li>
-</ul>
-</li>
-<li><a class="link" href="#pytorch" >PyTorch</a></li>
-<li><a class="link" href="#powershell%e9%85%8d%e7%bd%ae" >PowerShell配置</a></li>
-<li><a class="link" href="#python" >Python</a>
-<ul>
-<li><a class="link" href="#%e4%bd%bf%e7%94%a8conda%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83" >使用conda创建一个虚拟环境</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="环境配置文档">
+    <h1 id="环境配置文档">
     <a href="#%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae%e6%96%87%e6%a1%a3">#</a>
     环境配置文档
 </h1><h2 id="cuda">
@@ -631,7 +589,7 @@
     <a href="#%e5%8e%8b%e7%bc%a9%e5%8c%85%e4%b8%8b%e8%bd%bd">#</a>
     压缩包下载
 </h3><ol>
-<li><strong>cuDNN</strong>和<strong>CUDA</strong>是配套的，需要下载相对应的版本，进入<a class="link" href="https://developer.nvidia.com/cudnn"  target="_blank" rel="noopener"
+<li><strong>cuDNN</strong>和<strong>CUDA</strong>是配套的，需下载相对应的版本，进入<a class="link" href="https://developer.nvidia.com/cudnn"  target="_blank" rel="noopener"
     >cuDNN官网</a>
 <img src="/p/2024/04/pytorch-setup/17033345954133.jpg"
 	width="1402"
@@ -1424,7 +1382,7 @@ window.markmap = {
        onload='renderMathInElement(document.body, null);'>
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js" integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin="anonymous"></script>
-<script src="/js/main.min.beed1be94ebe04a73a3d983583046daf3fd8ac54857fa72d94a1e83c470d9eaf.js" integrity="sha256-vu0b6U6&#43;BKc6PZg1gwRtrz/YrFSFf6ctlKHoPEcNnq8=" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
 
 
     </body>
