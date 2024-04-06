@@ -15,12 +15,12 @@ dateFormat:
   published: 2006-01-02 15:04
   lastUpdated: 2006-01-02 15:04
 sidebar:
-  emoji:
-  subtitle: 挖坑埋雷 甩锅推诿
+  emoji: 🍭
+  subtitle: 扯皮、技术、生活
   avatar:
     enabled: true
     local: true
-    src: img/avatar.gif
+    src: img/avatar.jpg
 article:
   math: false
   readingTime: true
