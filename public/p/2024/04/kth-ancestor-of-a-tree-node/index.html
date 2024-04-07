@@ -104,7 +104,7 @@
             
                 <li>
                     <a 
-                        href='https://t.me/jf666666'
+                        href='https://t.me/jf268'
                         target="_blank"
                         title="Telegram"
                         rel="me"
@@ -283,12 +283,17 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#无限递归">无限递归</a></li>
-    <li><a href="#使用备忘录">使用备忘录</a></li>
-    <li><a href="#二进制提升">二进制提升</a>
+    <li><a href="#题目描述">题目描述</a></li>
+    <li><a href="#思路">思路</a>
       <ol>
-        <li><a href="#实现步骤">实现步骤</a></li>
-        <li><a href="#示例代码c">示例代码（C++）</a></li>
+        <li><a href="#无限递归">无限递归</a></li>
+        <li><a href="#使用备忘录">使用备忘录</a></li>
+        <li><a href="#二进制提升">二进制提升</a>
+          <ol>
+            <li><a href="#实现步骤">实现步骤</a></li>
+            <li><a href="#示例代码c">示例代码（C++）</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -382,21 +387,21 @@
     <section class="article-content">
     
     
-    <h1 id="题目描述">
+    <h2 id="题目描述">
     <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0">#</a>
     题目描述
-</h1><p>给你一棵树，树上有 <code>n</code> 个节点，按从 <code>0</code> 到 <code>n-1</code> 编号。树父节点数组的形式给出，其中 <code>parent[i]</code> 是节点 <code>i</code> 的父节点。树的根节点是编号为 <code>0</code> 的节点。</p>
+</h2><p>给你一棵树，树上有 <code>n</code> 个节点，按从 <code>0</code> 到 <code>n-1</code> 编号。树父节点数组的形式给出，其中 <code>parent[i]</code> 是节点 <code>i</code> 的父节点。树的根节点是编号为 <code>0</code> 的节点。</p>
 <p>树节点的第 <code>k</code> 个祖先节点是从该节点到根节点路径上的第 <code>k</code> 个节点。</p>
 <p>实现 <code>TreeAncestor</code> 类：</p>
 <p><code>TreeAncestor（int n， int[] parent）</code> 对树和父数组中的节点数初始化对象。
 <code>getKthAncestor(int node, int k)</code> 返回节点 <code>node</code> 的第 <code>k</code> 个祖先节点。如果不存在这样的祖先节点，返回 <code>-1</code> 。</p>
-<h1 id="思路">
+<h2 id="思路">
     <a href="#%e6%80%9d%e8%b7%af">#</a>
     思路
-</h1><h2 id="无限递归">
+</h2><h3 id="无限递归">
     <a href="#%e6%97%a0%e9%99%90%e9%80%92%e5%bd%92">#</a>
     无限递归
-</h2><p>一开始发现可以这样递归找到指定的 <code>parent</code>，提交后发现会超时。</p>
+</h3><p>一开始发现可以这样递归找到指定的 <code>parent</code>，提交后发现会超时。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -435,10 +440,10 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="使用备忘录">
+</div><h3 id="使用备忘录">
     <a href="#%e4%bd%bf%e7%94%a8%e5%a4%87%e5%bf%98%e5%bd%95">#</a>
     使用备忘录
-</h2><p>使用备忘录记录每个节点的信息，如果之前访问过就直接返回，避免进入递归，但还是超时了。</p>
+</h3><p>使用备忘录记录每个节点的信息，如果之前访问过就直接返回，避免进入递归，但还是超时了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -507,15 +512,15 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="二进制提升">
+</div><h3 id="二进制提升">
     <a href="#%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%8f%90%e5%8d%87">#</a>
     二进制提升
-</h2><p>这个问题可以通过预处理和动态规划的方法来解决。我们的目标是快速查询树中任意节点的第 (k) 个祖先节点。由于直接逐个遍历祖先节点可能会导致查询时间过长，特别是在树很大或查询很频繁的情况下，我们可以使用一种名为“二进制提升”的技术进行优化。</p>
+</h3><p>这个问题可以通过预处理和动态规划的方法来解决。我们的目标是快速查询树中任意节点的第 (k) 个祖先节点。由于直接逐个遍历祖先节点可能会导致查询时间过长，特别是在树很大或查询很频繁的情况下，我们可以使用一种名为“二进制提升”的技术进行优化。</p>
 <p>二进制提升的基本思想是预处理每个节点的第 (1, 2, 4, 8, \ldots, 2^i) 个祖先节点（这里的 (i) 使得 (2^i) 小于等于树的高度）。这样，对于任意的查询 <code>getKthAncestor(node, k)</code>，我们可以将 (k) 表示为二进制数，并通过已预处理的祖先信息以对数时间复杂度找到答案。</p>
-<h3 id="实现步骤">
+<h4 id="实现步骤">
     <a href="#%e5%ae%9e%e7%8e%b0%e6%ad%a5%e9%aa%a4">#</a>
     实现步骤
-</h3><ol>
+</h4><ol>
 <li>
 <p><strong>初始化</strong>：</p>
 <ul>
@@ -535,10 +540,10 @@
 </ul>
 </li>
 </ol>
-<h3 id="示例代码c">
+<h4 id="示例代码c">
     <a href="#%e7%a4%ba%e4%be%8b%e4%bb%a3%e7%a0%81c">#</a>
     示例代码（C++）
-</h3><div class="highlight"><div class="chroma">
+</h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -625,6 +630,34 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2024/04/throne-inheritance/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/categories/leetcode/cover.png" loading="lazy" data-key="throne-inheritance" data-hash="/categories/leetcode/cover.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">王位继承顺序</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
