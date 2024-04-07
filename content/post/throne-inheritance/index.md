@@ -1,6 +1,6 @@
 ---
 title: 王位继承顺序
-description: 力扣1483题
+description: 力扣1600题
 date: 2024-04-07T12:59:21+08:00
 slug: throne-inheritance
 image: ../categories/leetcode/cover.png
