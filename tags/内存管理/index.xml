@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>内存管理 on ziFeng's Blog</title><link>https://jf666666.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link><description>Recent content in 内存管理 on ziFeng's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 07 Apr 2024 12:59:21 +0800</lastBuildDate><atom:link href="https://jf666666.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml"/><item><title>王位继承顺序</title><link>https://jf666666.github.io/p/2024/04/throne-inheritance/</link><pubDate>Sun, 07 Apr 2024 12:59:21 +0800</pubDate><guid>https://jf666666.github.io/p/2024/04/throne-inheritance/</guid><description>&lt;img src="https://jf666666.github.io/categories/leetcode/cover.png" alt="Featured image of post 王位继承顺序" />&lt;h2 id="题目描述">题目描述
+&lt;/h2>&lt;p>一个王国里住着国王、他的孩子们、他的孙子们等等。每一个时间点，这个家庭里有人出生也有人死亡。&lt;/p>
+&lt;p>这个王国有一个明确规定的王位继承顺序，第一继承人总是国王自己。我们定义递归函数 &lt;code>Successor(x, curOrder)&lt;/code> ，给定一个人 &lt;code>x&lt;/code> 和当前的继承顺序，该函数返回 x 的下一继承人。&lt;/p>
+&lt;p>&lt;code>Successor(x, curOrder)&lt;/code>:
+如果 &lt;code>x&lt;/code> 没有孩子或者所有 x 的孩子都在 &lt;code>curOrder&lt;/code> 中：
+如果 &lt;code>x&lt;/code> 是国王，那么返回 &lt;code>null&lt;/code>
+否则，返回 &lt;code>Successor(x 的父亲, curOrder)&lt;/code>
+否则，返回 &lt;code>x&lt;/code> 不在 curOrder 中最年长的孩子
+比方说，假设王国由国王，他的孩子 &lt;code>Alice&lt;/code> 和 &lt;code>Bob&lt;/code> （&lt;code>Alice&lt;/code> 比 &lt;code>Bob&lt;/code> 年长）和 &lt;code>Alice&lt;/code> 的孩子 Jack 组成。&lt;/p>
+&lt;p>一开始， &lt;code>curOrder&lt;/code> 为 &lt;code>[&amp;quot;king&amp;quot;]&lt;/code>.
+调用 &lt;code>Successor(king, curOrder)&lt;/code> ，返回 &lt;code>Alice&lt;/code> ，所以我们将 &lt;code>Alice&lt;/code> 放入 &lt;code>curOrder&lt;/code> 中，得到 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;]&lt;/code> 。
+调用 &lt;code>Successor(Alice, curOrder)&lt;/code> ，返回 &lt;code>Jack&lt;/code> ，所以我们将 Jack 放入 &lt;code>curOrder&lt;/code> 中，得到 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;, &amp;quot;Jack&amp;quot;]&lt;/code>。
+调用 &lt;code>Successor(Jack, curOrder)&lt;/code> ，返回 &lt;code>Bob&lt;/code> ，所以我们将 Bob 放入 curOrder 中，得到 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;Bob&amp;quot;]&lt;/code> 。
+调用 &lt;code>Successor(Bob, curOrder)&lt;/code> ，返回 &lt;code>null&lt;/code> 。最终得到继承顺序为 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;Bob&amp;quot;]&lt;/code> 。
+通过以上的函数，我们总是能得到一个唯一的继承顺序。&lt;/p>
+&lt;p>请你实现 &lt;code>ThroneInheritance&lt;/code> 类：&lt;/p>
+&lt;p>&lt;code>ThroneInheritance(string kingName)&lt;/code> 初始化一个 &lt;code>ThroneInheritance&lt;/code> 类的对象。国王的名字作为构造函数的参数传入。
+&lt;code>void birth(string parentName, string childName)&lt;/code> 表示 &lt;code>parentName&lt;/code> 新拥有了一个名为 &lt;code>childName&lt;/code> 的孩子。
+&lt;code>void death(string name)&lt;/code> 表示名为 &lt;code>name&lt;/code> 的人死亡。一个人的死亡不会影响 &lt;code>Successor&lt;/code> 函数，也不会影响当前的继承顺序。你可以只将这个人标记为死亡状态。
+&lt;code>string[] getInheritanceOrder()&lt;/code> 返回 除去 死亡人员的当前继承顺序列表。&lt;/p>
+&lt;h2 id="思路">思路
+&lt;/h2>&lt;h3 id="dfs">DFS
+&lt;/h3>&lt;p>思路很简单，就是用一个map记录每个人的后代，有点像邻接表，然后dfs遍历就可以得到继承顺序，还有注意不要把死人加进顺序，可以用一个set记录哪些人死了。&lt;/p>
+&lt;h2 id="启发">启发
+&lt;/h2>&lt;p>这道题不难，但是我学到了一些很实用的知识，主要是c++的知识。&lt;/p>
+&lt;p>我的代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">ThroneInheritance&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">family&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_set&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ThroneInheritance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">kingName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">kingName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">birth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">parentName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">childName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">parentName&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">childName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">death&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">insert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">getInheritanceOrder&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">kingName&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">order&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&amp;amp;&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">isDead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">)){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">order&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">c&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">]){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">bool&lt;/span> &lt;span class="nf">isDead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">auto&lt;/span> &lt;span class="n">it&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">it&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>别人的代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">ThroneInheritance&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">private&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">edges&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_set&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">king&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ThroneInheritance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">king&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">kingName&lt;/span>&lt;span class="p">)}&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">birth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">parentName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">childName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">edges&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parentName&lt;/span>&lt;span class="p">)].&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">childName&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">death&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">insert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">getInheritanceOrder&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">function&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">preorder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ans&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">edges&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="nl">childName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">edges&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preorder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">childName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preorder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">king&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>两个 &lt;code>ThroneInheritance&lt;/code>类的实现在功能上是等价的：它们都使用深度优先搜索（DFS）来遍历家族树，生成继承顺序的列表，同时考虑已经去世的成员。主要的区别在于类成员的初始化、数据结构的操作以及递归函数的定义和调用方式。尽管这些区别对于功能实现来说是微不足道的，它们可能会影响到代码的运行时性能和内存使用，具体如下：&lt;/p>
+&lt;h3 id="成员变量初始化">&lt;strong>成员变量初始化&lt;/strong>：
+&lt;/h3>&lt;ul>
+&lt;li>第一个实现中使用 &lt;code>move&lt;/code>语义直接初始化 &lt;code>king&lt;/code>变量和在 &lt;code>birth&lt;/code>、&lt;code>death&lt;/code>方法中使用 &lt;code>move&lt;/code>语义插入元素，这可以减少字符串的复制次数，从而可能稍微减少内存使用和提高性能。&lt;/li>
+&lt;li>第二个实现中对于 &lt;code>kingName&lt;/code>的初始化使用的是直接赋值，这可能涉及到字符串的复制。&lt;/li>
+&lt;/ul>
+&lt;h3 id="递归函数定义">&lt;strong>递归函数定义&lt;/strong>：
+&lt;/h3>&lt;ul>
+&lt;li>第一个实现中使用了lambda表达式定义了递归函数，这种方法可能会让编译器更容易进行优化，特别是在内联函数调用方面。&lt;/li>
+&lt;li>第二个实现中，递归函数 &lt;code>successor&lt;/code>作为类的成员函数实现，这意味着每次调用都需要传递 &lt;code>this&lt;/code>指针，增加了调用的开销。&lt;/li>
+&lt;/ul>
+&lt;h3 id="数据结构操作">&lt;strong>数据结构操作&lt;/strong>：
+&lt;/h3>&lt;ul>
+&lt;li>在两个实现中，数据结构的操作方式基本一致，但是在如何访问和修改 &lt;code>family&lt;/code>或 &lt;code>edges&lt;/code>和 &lt;code>dead&lt;/code>时，细节上的处理（如是否使用 &lt;code>move&lt;/code>语义）可能会导致实际性能的微小差异。&lt;/li>
+&lt;/ul>
+&lt;h3 id="map和set">&lt;strong>map和set&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>第一个实现中在递归时，我发现我没进行判断有没有后代：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">family&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我以为就算没有后代，接下来的for循环会直接结束的吧，看来实际情况和我想的不一样，如果 &lt;code>family&lt;/code>映射中没有给定名称 &lt;code>name&lt;/code>的条目，那么 &lt;code>family[name]&lt;/code>将返回一个新的、空的 &lt;code>vector&amp;lt;string&amp;gt;&lt;/code>实例。在这种情况下，紧随其后的 &lt;code>for&lt;/code>循环应该会立即结束，因为它迭代的是一个空容器。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="nl">c&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">]){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果 &lt;code>name&lt;/code>没有对应的后代（即 &lt;code>family&lt;/code>中没有 &lt;code>name&lt;/code>的键），按照上面的代码逻辑，&lt;code>family[name]&lt;/code>将创建一个新的空 &lt;code>vector&lt;/code>，并立即返回。这意味着循环确实应该直接结束，不执行任何迭代。&lt;/p>
+&lt;p>然而，调用 &lt;code>family[name]&lt;/code>时有一个副作用：如果 &lt;code>family&lt;/code>中不存在键 &lt;code>name&lt;/code>，这个操作会在 &lt;code>family&lt;/code>中插入一个新的键值对，键是 &lt;code>name&lt;/code>，值是一个空的 &lt;code>vector&amp;lt;string&amp;gt;&lt;/code>。这是 &lt;code>std::unordered_map&lt;/code>的标准行为，即使用下标操作符 &lt;code>[]&lt;/code>访问映射时，如果键不存在，会自动创建它。&lt;/p>
+&lt;p>这个副作用意味着即使对于没有后代的成员，&lt;code>family&lt;/code>映射的大小也可能增加。
+正是这个副作用导致我的代码运行内存比第二个实现要高。&lt;/p>
+&lt;p>&lt;img src="https://jf666666.github.io/p/2024/04/throne-inheritance/time_memory.png"
+width="1562"
+height="160"
+srcset="https://jf666666.github.io/p/2024/04/throne-inheritance/time_memory_hue1c59a97f79a6a9f67dcae16f74c97fe_28429_480x0_resize_box_3.png 480w, https://jf666666.github.io/p/2024/04/throne-inheritance/time_memory_hue1c59a97f79a6a9f67dcae16f74c97fe_28429_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="976"
+data-flex-basis="2343px"
+>&lt;/p>
+&lt;p>这不会影响 &lt;code>for&lt;/code>循环的执行（因为新插入的向量是空的)，但确实会改变 &lt;code>family&lt;/code>映射的状态，这可能不是你想要的结果，特别是在考虑内存使用和性能的时候。因为每次调用 &lt;code>getInheritanceOrder&lt;/code>时，对于没有后代的成员也会增加新条目，这可能会导致 &lt;code>family&lt;/code>的大小不必要地增加。&lt;/p>
+&lt;p>因此，加上 &lt;code>if (family.count(name))&lt;/code>这样的判断是有意义的，它可以避免不必要地向 &lt;code>family&lt;/code>中添加新的空向量，尤其是在不需要为没有后代的成员记录空向量的情况下。这个判断确保了只有当 &lt;code>name&lt;/code>实际上有后代时，才会执行对应的递归调用，这样可以优化性能和内存使用，避免不必要的映射扩展。&lt;/p>
+&lt;p>总结来说，即使在没有明确后代的情况下 &lt;code>for&lt;/code>循环本身会直接结束，检查 &lt;code>family.count(name)&lt;/code>可以避免因为访问不存在的键而导致的 &lt;code>unordered_map&lt;/code>不必要的修改和潜在性能影响。&lt;/p></description></item></channel></rss>

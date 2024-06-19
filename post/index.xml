@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on ziFeng's Blog</title><link>https://jf666666.github.io/post/</link><description>Recent content in Posts on ziFeng's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 07 Apr 2024 12:59:21 +0800</lastBuildDate><atom:link href="https://jf666666.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>王位继承顺序</title><link>https://jf666666.github.io/p/2024/04/throne-inheritance/</link><pubDate>Sun, 07 Apr 2024 12:59:21 +0800</pubDate><guid>https://jf666666.github.io/p/2024/04/throne-inheritance/</guid><description>&lt;img src="https://jf666666.github.io/categories/leetcode/cover.png" alt="Featured image of post 王位继承顺序" />&lt;h2 id="题目描述">题目描述
+&lt;/h2>&lt;p>一个王国里住着国王、他的孩子们、他的孙子们等等。每一个时间点，这个家庭里有人出生也有人死亡。&lt;/p>
+&lt;p>这个王国有一个明确规定的王位继承顺序，第一继承人总是国王自己。我们定义递归函数 &lt;code>Successor(x, curOrder)&lt;/code> ，给定一个人 &lt;code>x&lt;/code> 和当前的继承顺序，该函数返回 x 的下一继承人。&lt;/p>
+&lt;p>&lt;code>Successor(x, curOrder)&lt;/code>:
+如果 &lt;code>x&lt;/code> 没有孩子或者所有 x 的孩子都在 &lt;code>curOrder&lt;/code> 中：
+如果 &lt;code>x&lt;/code> 是国王，那么返回 &lt;code>null&lt;/code>
+否则，返回 &lt;code>Successor(x 的父亲, curOrder)&lt;/code>
+否则，返回 &lt;code>x&lt;/code> 不在 curOrder 中最年长的孩子
+比方说，假设王国由国王，他的孩子 &lt;code>Alice&lt;/code> 和 &lt;code>Bob&lt;/code> （&lt;code>Alice&lt;/code> 比 &lt;code>Bob&lt;/code> 年长）和 &lt;code>Alice&lt;/code> 的孩子 Jack 组成。&lt;/p>
+&lt;p>一开始， &lt;code>curOrder&lt;/code> 为 &lt;code>[&amp;quot;king&amp;quot;]&lt;/code>.
+调用 &lt;code>Successor(king, curOrder)&lt;/code> ，返回 &lt;code>Alice&lt;/code> ，所以我们将 &lt;code>Alice&lt;/code> 放入 &lt;code>curOrder&lt;/code> 中，得到 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;]&lt;/code> 。
+调用 &lt;code>Successor(Alice, curOrder)&lt;/code> ，返回 &lt;code>Jack&lt;/code> ，所以我们将 Jack 放入 &lt;code>curOrder&lt;/code> 中，得到 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;, &amp;quot;Jack&amp;quot;]&lt;/code>。
+调用 &lt;code>Successor(Jack, curOrder)&lt;/code> ，返回 &lt;code>Bob&lt;/code> ，所以我们将 Bob 放入 curOrder 中，得到 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;Bob&amp;quot;]&lt;/code> 。
+调用 &lt;code>Successor(Bob, curOrder)&lt;/code> ，返回 &lt;code>null&lt;/code> 。最终得到继承顺序为 &lt;code>[&amp;quot;king&amp;quot;, &amp;quot;Alice&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;Bob&amp;quot;]&lt;/code> 。
+通过以上的函数，我们总是能得到一个唯一的继承顺序。&lt;/p>
+&lt;p>请你实现 &lt;code>ThroneInheritance&lt;/code> 类：&lt;/p>
+&lt;p>&lt;code>ThroneInheritance(string kingName)&lt;/code> 初始化一个 &lt;code>ThroneInheritance&lt;/code> 类的对象。国王的名字作为构造函数的参数传入。
+&lt;code>void birth(string parentName, string childName)&lt;/code> 表示 &lt;code>parentName&lt;/code> 新拥有了一个名为 &lt;code>childName&lt;/code> 的孩子。
+&lt;code>void death(string name)&lt;/code> 表示名为 &lt;code>name&lt;/code> 的人死亡。一个人的死亡不会影响 &lt;code>Successor&lt;/code> 函数，也不会影响当前的继承顺序。你可以只将这个人标记为死亡状态。
+&lt;code>string[] getInheritanceOrder()&lt;/code> 返回 除去 死亡人员的当前继承顺序列表。&lt;/p>
+&lt;h2 id="思路">思路
+&lt;/h2>&lt;h3 id="dfs">DFS
+&lt;/h3>&lt;p>思路很简单，就是用一个map记录每个人的后代，有点像邻接表，然后dfs遍历就可以得到继承顺序，还有注意不要把死人加进顺序，可以用一个set记录哪些人死了。&lt;/p>
+&lt;h2 id="启发">启发
+&lt;/h2>&lt;p>这道题不难，但是我学到了一些很实用的知识，主要是c++的知识。&lt;/p>
+&lt;p>我的代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">ThroneInheritance&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">family&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_set&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ThroneInheritance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">kingName&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">kingName&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">birth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">parentName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">childName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">parentName&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">childName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">death&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">insert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">getInheritanceOrder&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">kingName&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">order&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&amp;amp;&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">isDead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">)){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">order&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">auto&lt;/span> &lt;span class="nl">c&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">]){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">bool&lt;/span> &lt;span class="nf">isDead&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">auto&lt;/span> &lt;span class="n">it&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">it&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>别人的代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">ThroneInheritance&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">private&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">edges&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_set&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">dead&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">king&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ThroneInheritance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">kingName&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">king&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">kingName&lt;/span>&lt;span class="p">)}&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">birth&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">parentName&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">childName&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">edges&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">parentName&lt;/span>&lt;span class="p">)].&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">childName&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">void&lt;/span> &lt;span class="nf">death&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">insert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">move&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">getInheritanceOrder&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">function&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">preorder&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="p">](&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">dead&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ans&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">push_back&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">edges&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="nl">childName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">edges&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preorder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">childName&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preorder&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">king&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">ans&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>两个 &lt;code>ThroneInheritance&lt;/code>类的实现在功能上是等价的：它们都使用深度优先搜索（DFS）来遍历家族树，生成继承顺序的列表，同时考虑已经去世的成员。主要的区别在于类成员的初始化、数据结构的操作以及递归函数的定义和调用方式。尽管这些区别对于功能实现来说是微不足道的，它们可能会影响到代码的运行时性能和内存使用，具体如下：&lt;/p>
+&lt;h3 id="成员变量初始化">&lt;strong>成员变量初始化&lt;/strong>：
+&lt;/h3>&lt;ul>
+&lt;li>第一个实现中使用 &lt;code>move&lt;/code>语义直接初始化 &lt;code>king&lt;/code>变量和在 &lt;code>birth&lt;/code>、&lt;code>death&lt;/code>方法中使用 &lt;code>move&lt;/code>语义插入元素，这可以减少字符串的复制次数，从而可能稍微减少内存使用和提高性能。&lt;/li>
+&lt;li>第二个实现中对于 &lt;code>kingName&lt;/code>的初始化使用的是直接赋值，这可能涉及到字符串的复制。&lt;/li>
+&lt;/ul>
+&lt;h3 id="递归函数定义">&lt;strong>递归函数定义&lt;/strong>：
+&lt;/h3>&lt;ul>
+&lt;li>第一个实现中使用了lambda表达式定义了递归函数，这种方法可能会让编译器更容易进行优化，特别是在内联函数调用方面。&lt;/li>
+&lt;li>第二个实现中，递归函数 &lt;code>successor&lt;/code>作为类的成员函数实现，这意味着每次调用都需要传递 &lt;code>this&lt;/code>指针，增加了调用的开销。&lt;/li>
+&lt;/ul>
+&lt;h3 id="数据结构操作">&lt;strong>数据结构操作&lt;/strong>：
+&lt;/h3>&lt;ul>
+&lt;li>在两个实现中，数据结构的操作方式基本一致，但是在如何访问和修改 &lt;code>family&lt;/code>或 &lt;code>edges&lt;/code>和 &lt;code>dead&lt;/code>时，细节上的处理（如是否使用 &lt;code>move&lt;/code>语义）可能会导致实际性能的微小差异。&lt;/li>
+&lt;/ul>
+&lt;h3 id="map和set">&lt;strong>map和set&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>第一个实现中在递归时，我发现我没进行判断有没有后代：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">family&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>我以为就算没有后代，接下来的for循环会直接结束的吧，看来实际情况和我想的不一样，如果 &lt;code>family&lt;/code>映射中没有给定名称 &lt;code>name&lt;/code>的条目，那么 &lt;code>family[name]&lt;/code>将返回一个新的、空的 &lt;code>vector&amp;lt;string&amp;gt;&lt;/code>实例。在这种情况下，紧随其后的 &lt;code>for&lt;/code>循环应该会立即结束，因为它迭代的是一个空容器。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="nl">c&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="n">family&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">]){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">successor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果 &lt;code>name&lt;/code>没有对应的后代（即 &lt;code>family&lt;/code>中没有 &lt;code>name&lt;/code>的键），按照上面的代码逻辑，&lt;code>family[name]&lt;/code>将创建一个新的空 &lt;code>vector&lt;/code>，并立即返回。这意味着循环确实应该直接结束，不执行任何迭代。&lt;/p>
+&lt;p>然而，调用 &lt;code>family[name]&lt;/code>时有一个副作用：如果 &lt;code>family&lt;/code>中不存在键 &lt;code>name&lt;/code>，这个操作会在 &lt;code>family&lt;/code>中插入一个新的键值对，键是 &lt;code>name&lt;/code>，值是一个空的 &lt;code>vector&amp;lt;string&amp;gt;&lt;/code>。这是 &lt;code>std::unordered_map&lt;/code>的标准行为，即使用下标操作符 &lt;code>[]&lt;/code>访问映射时，如果键不存在，会自动创建它。&lt;/p>
+&lt;p>这个副作用意味着即使对于没有后代的成员，&lt;code>family&lt;/code>映射的大小也可能增加。
+正是这个副作用导致我的代码运行内存比第二个实现要高。&lt;/p>
+&lt;p>&lt;img src="https://jf666666.github.io/p/2024/04/throne-inheritance/time_memory.png"
+width="1562"
+height="160"
+srcset="https://jf666666.github.io/p/2024/04/throne-inheritance/time_memory_hue1c59a97f79a6a9f67dcae16f74c97fe_28429_480x0_resize_box_3.png 480w, https://jf666666.github.io/p/2024/04/throne-inheritance/time_memory_hue1c59a97f79a6a9f67dcae16f74c97fe_28429_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="976"
+data-flex-basis="2343px"
+>&lt;/p>
+&lt;p>这不会影响 &lt;code>for&lt;/code>循环的执行（因为新插入的向量是空的)，但确实会改变 &lt;code>family&lt;/code>映射的状态，这可能不是你想要的结果，特别是在考虑内存使用和性能的时候。因为每次调用 &lt;code>getInheritanceOrder&lt;/code>时，对于没有后代的成员也会增加新条目，这可能会导致 &lt;code>family&lt;/code>的大小不必要地增加。&lt;/p>
+&lt;p>因此，加上 &lt;code>if (family.count(name))&lt;/code>这样的判断是有意义的，它可以避免不必要地向 &lt;code>family&lt;/code>中添加新的空向量，尤其是在不需要为没有后代的成员记录空向量的情况下。这个判断确保了只有当 &lt;code>name&lt;/code>实际上有后代时，才会执行对应的递归调用，这样可以优化性能和内存使用，避免不必要的映射扩展。&lt;/p>
+&lt;p>总结来说，即使在没有明确后代的情况下 &lt;code>for&lt;/code>循环本身会直接结束，检查 &lt;code>family.count(name)&lt;/code>可以避免因为访问不存在的键而导致的 &lt;code>unordered_map&lt;/code>不必要的修改和潜在性能影响。&lt;/p></description></item><item><title>树节点的第K个祖先</title><link>https://jf666666.github.io/p/2024/04/kth-ancestor-of-a-tree-node/</link><pubDate>Sat, 06 Apr 2024 16:33:45 +0800</pubDate><guid>https://jf666666.github.io/p/2024/04/kth-ancestor-of-a-tree-node/</guid><description>&lt;img src="https://jf666666.github.io/categories/leetcode/cover.png" alt="Featured image of post 树节点的第K个祖先" />&lt;h2 id="题目描述">题目描述
+&lt;/h2>&lt;p>给你一棵树，树上有 &lt;code>n&lt;/code> 个节点，按从 &lt;code>0&lt;/code> 到 &lt;code>n-1&lt;/code> 编号。树父节点数组的形式给出，其中 &lt;code>parent[i]&lt;/code> 是节点 &lt;code>i&lt;/code> 的父节点。树的根节点是编号为 &lt;code>0&lt;/code> 的节点。&lt;/p>
+&lt;p>树节点的第 &lt;code>k&lt;/code> 个祖先节点是从该节点到根节点路径上的第 &lt;code>k&lt;/code> 个节点。&lt;/p>
+&lt;p>实现 &lt;code>TreeAncestor&lt;/code> 类：&lt;/p>
+&lt;p>&lt;code>TreeAncestor（int n， int[] parent）&lt;/code> 对树和父数组中的节点数初始化对象。
+&lt;code>getKthAncestor(int node, int k)&lt;/code> 返回节点 &lt;code>node&lt;/code> 的第 &lt;code>k&lt;/code> 个祖先节点。如果不存在这样的祖先节点，返回 &lt;code>-1&lt;/code> 。&lt;/p>
+&lt;h2 id="思路">思路
+&lt;/h2>&lt;h3 id="无限递归">无限递归
+&lt;/h3>&lt;p>一开始发现可以这样递归找到指定的 &lt;code>parent&lt;/code>，提交后发现会超时。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">TreeAncestor&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">record&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TreeAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;amp;&lt;/span> &lt;span class="n">parent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">parent&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="nf">getKthAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">cur_parent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">getKthAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cur_parent&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="使用备忘录">使用备忘录
+&lt;/h3>&lt;p>使用备忘录记录每个节点信息，如果之前访问过就直接返回，避免进入递归，但还是超时了。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c++" data-lang="c++">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">TreeAncestor&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">unordered_map&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">record&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TreeAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;amp;&lt;/span> &lt;span class="n">parent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">parent&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="nf">getKthAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">auto&lt;/span> &lt;span class="n">it&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">record&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">it&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">record&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">()){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">auto&lt;/span> &lt;span class="n">r&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">it&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">second&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">auto&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">!=&lt;/span>&lt;span class="n">r&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">end&lt;/span>&lt;span class="p">()){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">second&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">record&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">cur_parent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getKthAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cur_parent&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">record&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="二进制提升">二进制提升
+&lt;/h3>&lt;p>这个问题可以通过预处理和动态规划的方法来解决。我们的目标是快速查询树中任意节点的第 (k) 个祖先节点。由于直接逐个遍历祖先节点可能会导致查询时间过长，特别是在树很大或查询很频繁的情况下，我们可以使用一种名为“二进制提升”的技术进行优化。&lt;/p>
+&lt;p>二进制提升的基本思想是预处理每个节点的第 (1, 2, 4, 8, \ldots, 2^i) 个祖先节点（这里的 (i) 使得 (2^i) 小于等于树的高度）。这样，对于任意的查询 &lt;code>getKthAncestor(node, k)&lt;/code>，我们可以将 (k) 表示为二进制数，并通过已预处理的祖先信息以对数时间复杂度找到答案。&lt;/p>
+&lt;h4 id="实现步骤">实现步骤
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>初始化&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>创建一个数组 &lt;code>ancestor[node][i]&lt;/code>，其中 &lt;code>ancestor[node][i]&lt;/code> 表示节点 &lt;code>node&lt;/code> 的第 (2^i) 个祖先是谁。对于初始化，&lt;code>ancestor[node][0]&lt;/code> 是给定的 &lt;code>parent[node]&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>预处理&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>使用动态规划填充 &lt;code>ancestor&lt;/code> 数组。对于每个节点 &lt;code>node&lt;/code> 和每个 (i &amp;gt; 0)，有 &lt;code>ancestor[node][i] = ancestor[ancestor[node][i-1]][i-1]&lt;/code>。这里的意思是，节点 &lt;code>node&lt;/code> 的第 (2^i) 个祖先是其第 (2^{i-1}) 个祖先的第 (2^{i-1}) 个祖先。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>查询&lt;/strong>：&lt;/p>
+&lt;ul>
+&lt;li>对于查询 &lt;code>getKthAncestor(node, k)&lt;/code>，将 (k) 转换为二进制表示。然后从高位开始，对于每个为 &lt;code>1&lt;/code> 的位 &lt;code>i&lt;/code>，更新 &lt;code>node = ancestor[node][i]&lt;/code>。如果在某次更新中 &lt;code>node&lt;/code> 变成了 &lt;code>-1&lt;/code> 或在过程结束后 &lt;code>node&lt;/code> 为 &lt;code>-1&lt;/code>，则返回 &lt;code>-1&lt;/code> 表示不存在第 (k) 个祖先。否则，返回最终的 &lt;code>node&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="示例代码c">示例代码（C++）
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">TreeAncestor&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">ancestor&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">TreeAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;amp;&lt;/span> &lt;span class="n">parent&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ancestor&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">vector&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ancestor&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">parent&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">j&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ancestor&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ancestor&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ancestor&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">ancestor&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]][&lt;/span>&lt;span class="n">j&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="nf">getKthAncestor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">k&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">node&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ancestor&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">node&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这个实现能够在对数时间内处理每次查询，从而显著提高查询效率，尤其是在面对大量查询的情况下。&lt;/p></description></item><item><title>在Windows配置PyTroch，含conda、cuda等</title><link>https://jf666666.github.io/p/2024/04/pytorch-setup/</link><pubDate>Wed, 03 Apr 2024 22:34:22 +0800</pubDate><guid>https://jf666666.github.io/p/2024/04/pytorch-setup/</guid><description>&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/cover.png" alt="Featured image of post 在Windows配置PyTroch，含conda、cuda等" />&lt;h1 id="环境配置文档">环境配置文档
+&lt;/h1>&lt;h2 id="cuda">CUDA
+&lt;/h2>&lt;h3 id="安装包下载">安装包下载
+&lt;/h3>&lt;ol>
+&lt;li>前往&lt;a class="link" href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener"
+>CUDA Toolkit Archive&lt;/a>
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345952833.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345952833_hu7c2d80bad186d012b26df9b8500101f5_325068_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345952833_hu7c2d80bad186d012b26df9b8500101f5_325068_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;li>下载在之前提到的Cuda 12.1版本，这里选择&lt;a class="link" href="https://developer.nvidia.com/cuda-12-1-1-download-archive" target="_blank" rel="noopener"
+>CUDA Toolkit 12.1.1&lt;/a>进行下载，点击链接进入，选择&lt;code>Windows&lt;/code>、&lt;code>x86_64&lt;/code>、&lt;code>10&lt;/code>、&lt;code>exe(local)&lt;/code>，点击网页中的&lt;code>exe(local)&lt;/code>开始下载。
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953309.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953309_hu7c2d80bad186d012b26df9b8500101f5_193849_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953309_hu7c2d80bad186d012b26df9b8500101f5_193849_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;/ol>
+&lt;h3 id="cuda安装">CUDA安装
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>下载完成后得到一个大概3g的安装包，打开进行安装，选择一个临时目录进行解压，点击ok
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953432.jpg"
+width="617"
+height="233"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953432_hu7c2d80bad186d012b26df9b8500101f5_63721_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953432_hu7c2d80bad186d012b26df9b8500101f5_63721_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="264"
+data-flex-basis="635px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>等待解压完成
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87.png"
+width="425"
+height="171"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87_hu0976bf856bb0f5a5cdbe84d8f9248ecb_17680_480x0_resize_box_3.png 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/e739ad870e39186a7670abc870efea87_hu0976bf856bb0f5a5cdbe84d8f9248ecb_17680_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="e739ad870e39186a7670abc870efea87"
+class="gallery-image"
+data-flex-grow="248"
+data-flex-basis="596px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>解压完成后进入安装界面，这里也需要等待
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af.png"
+width="607"
+height="456"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af_hu93555564adeb0e3a58857dcce15f172e_168251_480x0_resize_box_3.png 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/1eae4dbb378116c4c1b66fa3737e05af_hu93555564adeb0e3a58857dcce15f172e_168251_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="1eae4dbb378116c4c1b66fa3737e05af"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击同意并继续
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953616.jpg"
+width="609"
+height="455"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953616_hu7c2d80bad186d012b26df9b8500101f5_80915_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953616_hu7c2d80bad186d012b26df9b8500101f5_80915_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击自定义后点击下一步
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953751.jpg"
+width="604"
+height="450"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953751_hu7c2d80bad186d012b26df9b8500101f5_72121_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953751_hu7c2d80bad186d012b26df9b8500101f5_72121_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>展开CUDA选项取消勾选&lt;code>Visual Studio Integration&lt;/code>，如图所示，其余不动，点击下一步
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953843.jpg"
+width="596"
+height="444"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953843_hu7c2d80bad186d012b26df9b8500101f5_71058_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953843_hu7c2d80bad186d012b26df9b8500101f5_71058_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>安装位置不需要修改，直接点击下一步
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953942.jpg"
+width="604"
+height="449"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953942_hu7c2d80bad186d012b26df9b8500101f5_71406_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345953942_hu7c2d80bad186d012b26df9b8500101f5_71406_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>等待安装结束即可
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954036.jpg"
+width="603"
+height="448"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954036_hu7c2d80bad186d012b26df9b8500101f5_56831_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954036_hu7c2d80bad186d012b26df9b8500101f5_56831_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="323px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="cudnn">cuDNN
+&lt;/h2>&lt;h3 id="压缩包下载">压缩包下载
+&lt;/h3>&lt;ol>
+&lt;li>&lt;strong>cuDNN&lt;/strong>和&lt;strong>CUDA&lt;/strong>是配套的，需下载相对应的版本，进入&lt;a class="link" href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener"
+>cuDNN官网&lt;/a>
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954133.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954133_hu7c2d80bad186d012b26df9b8500101f5_204315_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954133_hu7c2d80bad186d012b26df9b8500101f5_204315_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;li>需要&lt;strong>注册账号&lt;/strong>后才能进行下载
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954233.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954233_hu7c2d80bad186d012b26df9b8500101f5_137914_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954233_hu7c2d80bad186d012b26df9b8500101f5_137914_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;li>注册好账号之后点击&lt;code>Download cuDNN Library&lt;/code>按钮进入下图的下载界面
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954334.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954334_hu7c2d80bad186d012b26df9b8500101f5_228198_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954334_hu7c2d80bad186d012b26df9b8500101f5_228198_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;li>&lt;strong>同意协议&lt;/strong>后，选择&lt;code>for CUDA 12.x&lt;/code>进行下一个界面
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954434.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954434_hu7c2d80bad186d012b26df9b8500101f5_253197_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954434_hu7c2d80bad186d012b26df9b8500101f5_253197_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;li>这里选择第一个&lt;code>Local install for Windows(Zip)&lt;/code>进行下载
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954537.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954537_hu7c2d80bad186d012b26df9b8500101f5_247125_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954537_hu7c2d80bad186d012b26df9b8500101f5_247125_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/li>
+&lt;/ol>
+&lt;h3 id="cudnn安装">cuDNN安装
+&lt;/h3>&lt;ol>
+&lt;li>下载完成后得到一个压缩包
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954639.jpg"
+width="770"
+height="96"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954639_hu7c2d80bad186d012b26df9b8500101f5_43040_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954639_hu7c2d80bad186d012b26df9b8500101f5_43040_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="802"
+data-flex-basis="1925px"
+>&lt;/li>
+&lt;li>解压该压缩包可以看到其中有三个文件夹
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954741.jpg"
+width="778"
+height="186"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954741_hu7c2d80bad186d012b26df9b8500101f5_34022_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954741_hu7c2d80bad186d012b26df9b8500101f5_34022_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="418"
+data-flex-basis="1003px"
+>&lt;/li>
+&lt;li>选择三个文件夹&lt;code>bin&lt;/code>、&lt;code>include&lt;/code>、&lt;code>lib&lt;/code>并复制到CUDA的安装目录，默认目录为&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954846.jpg"
+width="817"
+height="581"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954846_hu7c2d80bad186d012b26df9b8500101f5_91152_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954846_hu7c2d80bad186d012b26df9b8500101f5_91152_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="140"
+data-flex-basis="337px"
+>
+复制过程中出现弹窗，选择&lt;strong>替换&lt;/strong>即可
+4. 将CUDA添加到&lt;strong>环境变量&lt;/strong>中&lt;/p>
+&lt;ul>
+&lt;li>按WIN+R，打开【运行】对话框。 输入sysdm.cpl，点【确定】按钮，点开高级选项卡，点开环境变量
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950.jpg"
+width="2000"
+height="784"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="255"
+data-flex-basis="612px"
+>&lt;/li>
+&lt;li>选择&lt;strong>系统变量&lt;/strong>中的Path，点击编辑，在这里需要添加CUDA的相关路径，有四个，进入先前的CUDA安装路径，点击右上侧的&lt;code>新建&lt;/code>按钮，添加以下路径&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\lib
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\libnvvp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955055.jpg"
+width="1068"
+height="1138"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955055_hu783122627ef1a33c8941efdd9234242b_337282_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955055_hu783122627ef1a33c8941efdd9234242b_337282_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="93"
+data-flex-basis="225px"
+>&lt;/p>
+&lt;h2 id="conda">Conda
+&lt;/h2>&lt;blockquote>
+&lt;p>Conda本身是一个开源的包管理和环境管理系统，用于安装、运行和升级包和其依赖。Conda可以在不同的Python发行版中使用，其中Anaconda和Miniconda是最著名的两种发行版，它们都包括了conda这个工具。
+&lt;strong>环境管理器：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>创建隔离环境：&lt;/strong> Conda允许用户创建隔离的环境，每个环境都可以有不同的Python版本和/或包。这对于管理不同项目的依赖非常有用，避免了包之间的冲突。&lt;/li>
+&lt;li>&lt;strong>环境复制：&lt;/strong> 可以轻松地复制和共享环境，这对于确保代码在不同计算机或用户之间可重复是非常有用的。
+Conda是一个强大的工具，主要用于科学计算领域，它的作用可以从几个不同的方面来理解：&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h3 id="安装包下载-1">安装包下载
+&lt;/h3>&lt;p>本文档选择&lt;strong>Anaconda&lt;/strong>进行安装，进入&lt;a class="link" href="https://www.anaconda.com/download#downloads" target="_blank" rel="noopener"
+>Anaconda下载&lt;/a>，下载Windows版本的安装包即可
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955251.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955251_hu7c2d80bad186d012b26df9b8500101f5_200994_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955251_hu7c2d80bad186d012b26df9b8500101f5_200994_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/p>
+&lt;h3 id="安装与配置">安装与配置
+&lt;/h3>&lt;h4 id="安装">安装
+&lt;/h4>&lt;ol>
+&lt;li>打开下载好的安装包进行安装步骤
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955377.jpg"
+width="1030"
+height="856"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955377_hu783122627ef1a33c8941efdd9234242b_162292_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955377_hu783122627ef1a33c8941efdd9234242b_162292_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="288px"
+>&lt;/li>
+&lt;li>点击&lt;code>Next&lt;/code>进入下一步
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955499.jpg"
+width="1006"
+height="776"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955499_hu783122627ef1a33c8941efdd9234242b_216327_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955499_hu783122627ef1a33c8941efdd9234242b_216327_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="129"
+data-flex-basis="311px"
+>&lt;/li>
+&lt;li>点击&lt;code>I Agree&lt;/code>同意协议
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955616.jpg"
+width="990"
+height="766"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955616_hu783122627ef1a33c8941efdd9234242b_90150_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955616_hu783122627ef1a33c8941efdd9234242b_90150_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="129"
+data-flex-basis="310px"
+>&lt;/li>
+&lt;li>保持默认选择&lt;code>Just Me&lt;/code>，点击下一步
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955769.jpg"
+width="992"
+height="770"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955769_hu783122627ef1a33c8941efdd9234242b_133151_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955769_hu783122627ef1a33c8941efdd9234242b_133151_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="309px"
+>&lt;/li>
+&lt;li>这里可以选择其他安装位置，最好是默认的
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955885.jpg"
+width="994"
+height="774"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955885_hu783122627ef1a33c8941efdd9234242b_185993_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345955885_hu783122627ef1a33c8941efdd9234242b_185993_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="308px"
+>&lt;/li>
+&lt;li>仍然保持默认选择，点击&lt;code>Install&lt;/code>进行安装，等待安装完成&lt;/li>
+&lt;/ol>
+&lt;h4 id="配置">配置
+&lt;/h4>&lt;blockquote>
+&lt;p>主要是配置环境变量，步骤与配置CUDA的步骤一样&lt;/p>
+&lt;/blockquote>
+&lt;ol>
+&lt;li>按WIN+R，打开【运行】对话框。 输入sysdm.cpl，点【确定】按钮，点开高级选项卡，点开环境变量
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950.jpg"
+width="2000"
+height="784"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345954950_hu09c8588689f4b8f3df7abce1fd395397_275727_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="255"
+data-flex-basis="612px"
+>&lt;/li>
+&lt;li>选择&lt;strong>系统变量&lt;/strong>中的Path，点击编辑，在这里需要添加Conda的相关路径，有三个，进入先前的Conda安装路径，点击右上侧的&lt;code>新建&lt;/code>按钮，添加以下路径&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">D:\ProgramData\anaconda3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">D:\ProgramData\anaconda3\condabin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">D:\ProgramData\anaconda3\Library\bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>注意&lt;/strong>：这里的&lt;code>D:\ProgramData\anaconda3&lt;/code>是anaconda的安装路径，应该替换为你实际的安装地址，添加路径之后应该是这样的&lt;/p>
+&lt;h2 id="visual-studio-code">Visual Studio Code
+&lt;/h2>&lt;h3 id="下载安装包">下载安装包
+&lt;/h3>&lt;p>进入&lt;a class="link" href="https://code.visualstudio.com" target="_blank" rel="noopener"
+>vscode官网&lt;/a>，下载&lt;strong>Windows&lt;/strong>的&lt;strong>Stable&lt;/strong>安装包
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956001.jpg"
+width="2804"
+height="1934"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956001_hud270275eb86d5223d279751e979ec3c4_761655_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956001_hud270275eb86d5223d279751e979ec3c4_761655_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/p>
+&lt;h3 id="配置环境">配置环境
+&lt;/h3>&lt;blockquote>
+&lt;p>在VScode中配置python的运行环境&lt;/p>
+&lt;/blockquote>
+&lt;ol>
+&lt;li>设置VScode语言为中文&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>点击左侧的扩展按钮，搜索&lt;code>Chinese&lt;/code>插件并安装
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956128.jpg"
+width="3840"
+height="2160"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956128_hu783122627ef1a33c8941efdd9234242b_826493_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956128_hu783122627ef1a33c8941efdd9234242b_826493_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/li>
+&lt;li>按下快捷键&lt;code>Ctrl+Shift+P&lt;/code>，输入&lt;code>config display language&lt;/code>，选择中文即可
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956262.jpg"
+width="3840"
+height="2160"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956262_hu783122627ef1a33c8941efdd9234242b_818061_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956262_hu783122627ef1a33c8941efdd9234242b_818061_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/li>
+&lt;/ul>
+&lt;ol start="2">
+&lt;li>安装Python扩展，在左侧扩展栏搜索&lt;code>Python&lt;/code>、&lt;code>Python Environment Manager&lt;/code>进行安装
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956394.jpg"
+width="3840"
+height="2160"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956394_hu783122627ef1a33c8941efdd9234242b_646262_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956394_hu783122627ef1a33c8941efdd9234242b_646262_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/li>
+&lt;li>Conda设置
+打开vscode设置，搜索conda，在下图中填入conda路径即可
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956535.jpg"
+width="3840"
+height="2160"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956535_hu783122627ef1a33c8941efdd9234242b_595032_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956535_hu783122627ef1a33c8941efdd9234242b_595032_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/li>
+&lt;/ol>
+&lt;h2 id="pytorch">PyTorch
+&lt;/h2>&lt;p>&lt;a class="link" href="https://pytorch.org" target="_blank" rel="noopener"
+>Pytorch&lt;/a>是yolo进行检测与训练需要的最基本的库，也需要根据当前最新的pytorch支持的cuda版本，选择对应版本的CUDA安装，
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956687.jpg"
+width="1402"
+height="967"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956687_hu7c2d80bad186d012b26df9b8500101f5_240511_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956687_hu7c2d80bad186d012b26df9b8500101f5_240511_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>
+在网站中&lt;code>Pytorch Build&lt;/code>选择&lt;code>Stable&lt;/code>，&lt;code>Your OS&lt;/code>选择&lt;code>Windows&lt;/code>，&lt;code>Package&lt;/code>选择&lt;code>Pip&lt;/code>，&lt;code>Language&lt;/code>选择&lt;code>Python&lt;/code>，&lt;code>Compute Platform&lt;/code>选择较新的版本（是因为4060ti是较新的显卡），即&lt;code>CUDA 12.1&lt;/code>，最终选择如图，复制最后的&lt;code>Run this Command&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">pip3&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">torch&lt;/span> &lt;span class="n">torchvision&lt;/span> &lt;span class="n">torchaudio&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">url&lt;/span> &lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">download&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pytorch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">org&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">whl&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">cu121&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="powershell配置">PowerShell配置
+&lt;/h2>&lt;blockquote>
+&lt;p>前面的conda安装好之后，需要对&lt;code>PowerShell&lt;/code>进行简单的配置&lt;/p>
+&lt;/blockquote>
+&lt;ol>
+&lt;li>在菜单栏中找到&lt;code>PowerShell&lt;/code>，点击&lt;code>以管理员身份运行&lt;/code>。
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956835.jpg"
+width="3840"
+height="2160"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956835_hu783122627ef1a33c8941efdd9234242b_664095_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345956835_hu783122627ef1a33c8941efdd9234242b_664095_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/li>
+&lt;li>打开后执行以下命令&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">conda&lt;/span> &lt;span class="n">init&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345957003.jpg"
+width="1724"
+height="1464"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033345957003_hu783122627ef1a33c8941efdd9234242b_529051_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033345957003_hu783122627ef1a33c8941efdd9234242b_529051_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+>&lt;/p>
+&lt;ol start="3">
+&lt;li>更改PowerShell的脚本执行策略为&lt;code>Unrestricted&lt;/code>，通过如下命令进行设置&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Set-ExecutionPolicy&lt;/span> &lt;span class="n">Unrestricted&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行&lt;code>Get-ExecutionPolicy&lt;/code>以确认更改已生效&lt;/p>
+&lt;h2 id="python">Python
+&lt;/h2>&lt;blockquote>
+&lt;p>配置一个独立的python环境&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="使用conda创建一个虚拟环境">使用conda创建一个虚拟环境
+&lt;/h3>&lt;ol>
+&lt;li>打开vscode，新建一个终端
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033316544757.jpg"
+width="3840"
+height="2160"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033316544757_hufcf2301eede78afda1d33c6ccae7086f_808746_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033316544757_hufcf2301eede78afda1d33c6ccae7086f_808746_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/li>
+&lt;li>在终端中输入以下命令创建一个环境&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">conda&lt;/span> &lt;span class="n">create&lt;/span> &lt;span class="n">-n&lt;/span> &lt;span class="n">auto_template&lt;/span> &lt;span class="n">python&lt;/span>&lt;span class="p">==&lt;/span>&lt;span class="mf">3.9&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>激活环境
+创建完成后输入&lt;code>conda activate auto_template&lt;/code>激活环境，在输入之前的pytorch命令安装pytorch&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">pip3&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">torch&lt;/span> &lt;span class="n">torchvision&lt;/span> &lt;span class="n">torchaudio&lt;/span> &lt;span class="o">--&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">url&lt;/span> &lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">download&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pytorch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">org&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">whl&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">cu121&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>安装完成后，创建一个测试用的python文件，输入以下代码&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">is_available&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行后查看输出是否为&lt;code>True&lt;/code>，为&lt;code>True&lt;/code>则代表安装一切顺利
+&lt;img src="https://jf666666.github.io/p/2024/04/pytorch-setup/17033319295868.jpg"
+width="840"
+height="390"
+srcset="https://jf666666.github.io/p/2024/04/pytorch-setup/17033319295868_hufcf2301eede78afda1d33c6ccae7086f_74876_480x0_resize_q75_box.jpg 480w, https://jf666666.github.io/p/2024/04/pytorch-setup/17033319295868_hufcf2301eede78afda1d33c6ccae7086f_74876_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="215"
+data-flex-basis="516px"
+>&lt;/p></description></item></channel></rss>
